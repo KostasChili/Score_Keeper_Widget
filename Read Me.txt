@@ -1,0 +1,5 @@
+Widget Description
+
+This is a score keeping widget for two player games.
+Each player has a button.The players can set the number of points they need to win the game.Each player through his button increments his score. The score is displayed in the format of player1Score to player2Score. (1 to 5). When a player reaches the score required to win, his score is hilighted in Green color and the opents in Red.
+The widget also must have a reset button in order to reset the score.
