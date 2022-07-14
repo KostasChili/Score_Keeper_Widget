@@ -4,21 +4,48 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <title>Score Keeper Widget</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1><span id="p1score">0</span> to <span id="p2score">0</span></h1>
-  <div id="selectcontainer">
-  <select id="maxgames">Playing To :</select>
-</div>
-  <span id="btncontainer">
-  <button id="p1button">+1 Player One</button>
-  <button id="p2button">+1 Player Two</button>
-  <button id="rbutton">Reset</button>
-</span>
-
-
+  <section class="section">
+  <div class="container">
+    <div class="columns">
+       <div class="column is-half is-offset-one-quarter" #>
+        <div class="card">
+          <div class="card-image">
+            <figure class="image is-2by1">
+              <img src="https://images.unsplash.com/photo-1534158914592-062992fbe900?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3784&q=80">
+            </figure>
+          </div>
+          <header class="card-header">
+            <p class="card-header-title">
+              Games Score Keeper
+            </p>
+          
+          </header>
+          <div class="card-content">
+            <div class="content">
+              <h1 class="title is-1"><span id="p1score">0</span> to <span id="p2score">0</span></h1>
+              <label for="maxgames" class="is-inline is-large">Playing to :</label>
+              <div class="select is-rounded">
+                <select id="maxgames"></select>
+              </div>
+              <p class="subtitle">Use the buttons below to keep score</p>
+            </div>
+          </div>
+          <footer id="btncontainer" class="card-footer  ">
+              <button id="p1button" class="is-primary button card-footer-item flex-direction: column is-normal">+1 Player One</button>
+              <button id="p2button" class="is-info button card-footer-item flex-direction: column is-normal">+1 Player Two</button>
+              <button id="rbutton"  class="is-danger button card-footer-item  flex-direction: column is-normal">Reset</button>
+          </footer>
+        </div>
+       </div>
+    </div>
+  </div>
+  </section>
 
   <script src="app.js"></script>  
 </body>
