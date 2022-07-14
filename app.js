@@ -1,17 +1,44 @@
-const p1Button=document.querySelector('#p1button');
-const p2Button=document.querySelector('#p2button');
+//start by making objects out of the players and adding properties
+const p1={
+    score:0,
+    button:document.querySelector('#p1button'),
+    display:document.querySelector('#p1score'),
+};
+const p2={
+    score:0,
+    button:document.querySelector('#p2button'),
+    display:document.querySelector('#p2score'),
+};
+
 const rButton=document.querySelector('#rbutton');
-const p1ScoreDisplay=document.querySelector('#p1score');
-const p2ScoreDisplay=document.querySelector('#p2score');
 const btnContainer=document.querySelector('#btncontainer');
 const gameSelect=document.querySelector('#maxgames');
 //get all important elements
 //make variables for score keeping
-let p1Score=0;
-let p2Score=0;
 let maxScore=0;
 let gameOver=false;
 
+//this function checks the flag and if there has been maxScorrer
+//and if not updates the score counter and display
+//if the max score is reached it adds the winner and loser 
+//classes to the players 
+function scoreUpdate(scorrer,oponent)
+{
+   if(!gameOver)
+   {
+    scorrer.score++;
+   }
+   if(scorrer.score===maxScore)
+   {
+    gameOver=true;
+    //add appropriate classes to winner and looser
+    scorrer.display.setAttribute('class','winner');
+    oponent.display.setAttribute('class','loser');
+    scorrer.button.disabled=true;
+    oponent.button.disabled=true;
+   }
+   scorrer.display.innerText=scorrer.score;
+}
 //make option for game select
 for(let i=1;i<=20;i++)
 {
@@ -24,62 +51,37 @@ for(let i=1;i<=20;i++)
 //and reset the game when needed
 gameSelect.addEventListener('change',()=>{
     maxScore=parseInt(gameSelect.value);
-    reset();
-})
-//add event listener to the container of the button
-//so each time a button is clicked
-//we can see the target element and decide what to dp
+    reset(p1);
+    reset(p2);
+});
+
+//if the container is clicked check which button was it 
 btnContainer.addEventListener('click',(e)=>{ //with use of Event Delegation
     if(e.target.innerHTML==='+1 Player One')
   {
-    //if event target is p1 then +1 his score
-    //and update the textContent of the span element 
-    if(!gameOver)
-    {
-        p1Score++;
-    }
-    if(p1Score===maxScore)
-    {
-     gameOver=true;
-     //add appropriate classes to winner and looser
-     p1ScoreDisplay.setAttribute('class','winner');
-     p2ScoreDisplay.setAttribute('class','loser');
-    }
-    p1ScoreDisplay.textContent=p1Score;
+      scoreUpdate(p1,p2);
   }
     else if(e.target.innerHTML==='+1 Player Two')
     {
-        //same for player 2
-        if(!gameOver)
-        {
-            p2Score++;
-        }
-        if(p2Score===maxScore)
-        {
-         gameOver=true;
-         //add appropriate classes to winner and looser
-         p2ScoreDisplay.setAttribute('class','winner');
-         //or .classList.add('class name');
-         p1ScoreDisplay.setAttribute('class','loser');
-        }
-        p2ScoreDisplay.textContent=p2Score;
-      }
+      scoreUpdate(p2,p1);
+    }
     else
     {
-        reset();
+        reset(p1);
+        reset(p2);
     }
 });
 
-function reset(){
+//this function resests every property of the player objects
+function reset(player){
     //if a click event happens on the btnContainer
         //but the target is either p1btn or p2btn
         //then is the reset button so zero all values        p1Score=0;
-        p2Score=0;
-        p1Score=0;
-        p1ScoreDisplay.textContent=0;
-        p2ScoreDisplay.textContent=0;
+       
+        player.score=0;
+        player.display.innerText=0;
         gameOver=false;
         //remove all winner status classes
-        p1ScoreDisplay.classList.remove('winner','loser');
-        p2ScoreDisplay.classList.remove('winner','loser');
+        player.display.classList.remove('winner','loser');
+        player.button.disabled=false;
 }
